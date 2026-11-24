@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>नन्हा गुरु Asish</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f8ff;
+  color: #222;
+}
+
+header {
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+  color: white;
+  text-align: center;
+  padding: 24px 12px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+header p {
+  font-size: 17px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav button {
+  border: none;
+  border-radius: 20px;
+  padding: 12px 15px;
+  background: #2196f3;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+main {
+  padding: 15px;
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+h2 {
+  text-align: center;
+  color: #1565c0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 18px 10px;
+  text-align: center;
+  box-shadow: 0 3px 10px #0001;
+}
+
+.big {
+  font-size: 38px;
+  margin: 8px;
+}
+
+.card button {
+  border: none;
+  background: #4caf50;
+  color: white;
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.welcome {
+  background: #fff3cd;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.quiz-box {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 3px 10px #0001;
+}
+
+.quiz-box button {
+  background: #673ab7;
+  color: white;
+  border: none;
+  padding: 12px;
+  margin: 7px;
+  border-radius: 12px;
+  font-size: 18px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #555;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🎓 नन्हा गुरु Asish</h1>
+  <p>खेल-खेल में पढ़ाई सीखें! 🌈</p>
+</header>
+
+<nav>
+  <button onclick="showSection('home')">🏠 घर</button>
+  <button onclick="showSection('letters')">🔤 अक्षर</button>
+  <button onclick="showSection('numbers')">🔢 गिनती</button>
+  <button onclick="showSection('colors')">🎨 रंग</button>
+  <button onclick="showSection('animals')">🐶 जानवर</button>
+  <button onclick="showSection('quiz')">🧠 क्विज़</button>
+</nav>
+
+<main>
+
+<section id="home" class="section active">
+  <div class="welcome">
+    <h2>नमस्ते बच्चों! 👋</h2>
+    <p>आज हम नई-नई चीजें सीखेंगे।</p>
+    <p>बटन दबाकर पढ़ना और सुनना शुरू करें।</p>
+    <div class="big">📚 🌟 🎈</div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="big">🔤</div>
+      <h3>हिंदी अक्षर</h3>
+      <button onclick="showSection('letters')">सीखें</button>
+    </div>
+
+    <div class="card">
+      <div class="big">🔢</div>
+      <h3>गिनती</h3>
+      <button onclick="showSection('numbers')">सीखें</button>
+    </div>
+
+    <div class="card">
+      <div class="big">🎨</div>
+      <h3>रंग</h3>
+      <button onclick="showSection('colors')">सीखें</button>
+    </div>
+
+    <div class="card">
+      <div class="big">🐘</div>
+      <h3>जानवर</h3>
+      <button onclick="showSection('animals')">सीखें</button>
+    </div>
+  </div>
+</section>
+
+<section id="letters" class="section">
+  <h2>🔤 हिंदी अक्षर सीखें</h2>
+  <div class="grid" id="letterGrid"></div>
+</section>
+
+<section id="numbers" class="section">
+  <h2>🔢 1 से 20 तक गिनती</h2>
+  <div class="grid" id="numberGrid"></div>
+</section>
+
+<section id="colors" class="section">
+  <h2>🎨 रंगों की पहचान</h2>
+  <div class="grid" id="colorGrid"></div>
+</section>
+
+<section id="animals" class="section">
+  <h2>🐯 जानवरों के नाम</h2>
+  <div class="grid" id="animalGrid"></div>
+</section>
+
+<section id="quiz" class="section">
+  <h2>🧠 बच्चों का मजेदार क्विज़</h2>
+  <div class="quiz-box">
+    <h3 id="question">तैयार हो?</h3>
+    <div id="answers"></div>
+    <p id="result"></p>
+    <button onclick="nextQuestion()">अगला सवाल ➡️</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>❤️ नन्हा गुरु Asish | बच्चों का लर्निंग ऐप</p>
+</footer>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll(".section").forEach(function(section) {
+    section.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0, 0);
+}
+
+function speak(text) {
+  if (!("speechSynthesis" in window)) {
+    alert("इस फोन में बोलने की सुविधा उपलब्ध नहीं है।");
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  let msg = new SpeechSynthesisUtterance(text);
+  msg.lang = "hi-IN";
+  msg.rate = 0.85;
+  msg.pitch = 1.1;
+
+  speechSynthesis.speak(msg);
+}
+
+// हिंदी अक्षर
+const letters = [
+  ["अ","अनार"], ["आ","आम"], ["इ","इमली"],
+  ["ई","ईख"], ["उ","उल्लू"], ["ऊ","ऊन"],
+  ["ए","एक"], ["ऐ","ऐनक"], ["ओ","ओखली"],
+  ["औ","औरत"], ["क","कमल"], ["ख","खरगोश"],
+  ["ग","गमला"], ["घ","घर"], ["च","चम्मच"],
+  ["छ","छतरी"], ["ज","जहाज"], ["ट","टमाटर"],
+  ["ठ","ठेला"], ["ड","डमरू"], ["त","तरबूज"],
+  ["थ","थाली"], ["द","दवात"], ["ध","धनुष"],
+  ["न","नल"], ["प","पतंग"], ["फ","फल"],
+  ["ब","बतख"], ["भ","भालू"], ["म","मछली"],
+  ["य","यज्ञ"], ["र","रथ"], ["ल","लड्डू"],
+  ["व","वायु"], ["श","शेर"], ["स","सेब"],
+  ["ह","हाथी"]
+];
+
+letters.forEach(function(item) {
+  document.getElementById("letterGrid").innerHTML += `
+    <div class="card">
+      <div class="big">${item[0]}</div>
+      <h3>${item[1]}</h3>
+      <button onclick="speak('${item[0]} से ${item[1]}')">
+        🔊 सुनें
+      </button>
+    </div>
+  `;
+});
+
+// गिनती 1 से 20
+const hindiNumbers = [
+  "एक","दो","तीन","चार","पाँच",
+  "छह","सात","आठ","नौ","दस",
+  "ग्यारह","बारह","तेरह","चौदह","पंद्रह",
+  "सोलह","सत्रह","अठारह","उन्नीस","बीस"
+];
+
+for (let i = 1; i <= 20; i++) {
+  document.getElementById("numberGrid").innerHTML += `
+    <div class="card">
+      <div class="big">${i}</div>
+      <h3>${hindiNumbers[i-1]}</h3>
+      <button onclick="speak('${i} ${hindiNumbers[i-1]}')">
+        🔊 सुनें
+      </button>
+    </div>
+  `;
+}
+
+// रंग
+const colors = [
+  ["लाल","#f44336"],
+  ["हरा","#4caf50"],
+  ["नीला","#2196f3"],
+  ["पीला","#ffeb3b"],
+  ["गुलाबी","#e91e63"],
+  ["नारंगी","#ff9800"],
+  ["काला","#212121"],
+  ["सफेद","#ffffff"],
+  ["बैंगनी","#9c27b0"],
+  ["भूरा","#795548"]
+];
+
+colors.forEach(function(color) {
+  document.getElementById("colorGrid").innerHTML += `
+    <div class="card">
+      <div style="width:80px;height:80px;background:${color[1]};
+      border-radius:50%;margin:auto;border:2px solid #ddd"></div>
+      <h3>${color[0]}</h3>
+      <button onclick="speak('${color[0]} रंग')">🔊 सुनें</button>
+    </div>
+  `;
+});
+
+// जानवर
+const animals = [
+  ["🐶","कुत्ता"], ["🐱","बिल्ली"], ["🐮","गाय"],
+  ["🐘","हाथी"], ["🦁","शेर"], ["🐯","बाघ"],
+  ["🐵","बंदर"], ["🐰","खरगोश"], ["🐻","भालू"],
+  ["🐴","घोड़ा"], ["🐐","बकरी"], ["🐪","ऊँट"],
+  ["🦚","मोर"], ["🐦","चिड़िया"], ["🐟","मछली"]
+];
+
+animals.forEach(function(animal) {
+  document.getElementById("animalGrid").innerHTML += `
+    <div class="card">
+      <div class="big">${animal[0]}</div>
+      <h3>${animal[1]}</h3>
+      <button onclick="speak('${animal[1]}')">🔊 सुनें</button>
+    </div>
+  `;
+});
+
+// क्विज़
+const questions = [
+  {
+    q:"आम का रंग क्या होता है?",
+    a:["नीला","पीला","काला"],
+    correct:"पीला"
+  },
+  {
+    q:"एक के बाद कौन आता है?",
+    a:["तीन","चार","दो"],
+    correct:"दो"
+  },
+  {
+    q:"गाय हमें क्या देती है?",
+    a:["दूध","पानी","पत्थर"],
+    correct:"दूध"
+  },
+  {
+    q:"जंगल का राजा कौन है?",
+    a:["बिल्ली","शेर","चूहा"],
+    correct:"शेर"
+  },
+  {
+    q:"आसमान का रंग कैसा होता है?",
+    a:["हरा","लाल","नीला"],
+    correct:"नीला"
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function loadQuestion() {
+  if (currentQuestion >= questions.length) {
+    document.getElementById("question").innerHTML =
+      "🎉 क्विज़ पूरा हुआ!";
+
+    document.getElementById("answers").innerHTML = "";
+    document.getElementById("result").innerHTML =
+      "आपका स्कोर: " + score + " / " + questions.length;
+
+    return;
+  }
+
+  let q = questions[currentQuestion];
+
+  document.getElementById("question").innerHTML = q.q;
+  document.getElementById("result").innerHTML = "";
+  document.getElementById("answers").innerHTML = "";
+
+  q.a.forEach(function(answer) {
+    let btn = document.createElement("button");
+    btn.innerText = answer;
+
+    btn.onclick = function() {
+      if (answer === q.correct) {
+        score++;
+        document.getElementById("result").innerHTML =
+          "✅ बहुत बढ़िया! सही जवाब!";
+      } else {
+        document.getElementById("result").innerHTML =
+          "❌ कोई बात नहीं! सही जवाब: " + q.correct;
+      }
+
+      document.querySelectorAll("#answers button").forEach(function(b) {
+        b.disabled = true;
+      });
+    };
+
+    document.getElementById("answers").appendChild(btn);
+  });
+}
+
+function nextQuestion() {
+  currentQuestion++;
+  loadQuestion();
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
