@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="hi">
-<head>
+<head><link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1d4ed8">
+  
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>नन्हा गुरु Asish</title>
@@ -25,10 +27,6 @@
 }
 </style>
 
-<button id="voiceBtn">🎤 बोलकर पूछें</button>
-
-<script>
-const btn = document.getElementById("voiceBtn");
 
 const SpeechRecognition =
   window.SpeechRecognition ||
@@ -83,7 +81,14 @@ if (SpeechRecognition) {
   });
 </script>
   
-body {
+body <script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("./sw.js");
+    });
+  }
+</script>
+  {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #f1f8ff;
