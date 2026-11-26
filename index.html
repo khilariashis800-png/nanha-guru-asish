@@ -66,6 +66,44 @@ if (SpeechRecognition) {
   btn.innerText = "Voice support नहीं है";
 }
 </script>
+<section id="english-az" style="max-width: 900px; margin: 24px auto; font-family: system-ui, sans-serif; padding: 16px;">
+  <h2 style="text-align: center; margin-bottom: 16px;">English A to Z</h2>
+  <div id="az-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 12px;"></div>
+</section>
+
+<script>
+  const words = {
+    A: "Apple", B: "Ball", C: "Cat", D: "Dog", E: "Elephant",
+    F: "Fish", G: "Grapes", H: "House", I: "Ice cream", J: "Joker",
+    K: "Kite", L: "Lion", M: "Monkey", N: "Nest", O: "Orange",
+    P: "Parrot", Q: "Queen", R: "Rabbit", S: "Sun", T: "Tiger",
+    U: "Umbrella", V: "Van", W: "Watch", X: "Xylophone", Y: "Yak",
+    Z: "Zebra"
+  };
+
+  const grid = document.getElementById("az-grid");
+
+  Object.keys(words).forEach((letter) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.style.cssText = "padding: 12px 8px; border: 2px solid #e2e8f0; border-radius: 12px; background: #ffffff; cursor: pointer; text-align: center;";
+    card.innerHTML = `
+      <div style="font-size: 24px; font-weight: 700; color: #1d4ed8;">${letter} ${letter.toLowerCase()}</div>
+      <div style="font-size: 13px; color: #334155; margin-top: 4px;">${words[letter]}</div>
+    `;
+
+    card.addEventListener("click", () => {
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+        const msg = new SpeechSynthesisUtterance(`${letter} for ${words[letter]}`);
+        msg.lang = "en-IN";
+        window.speechSynthesis.speak(msg);
+      }
+    });
+
+    grid.appendChild(card);
+  });
+</script>
   
 body {
   margin: 0;
