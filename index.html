@@ -10,6 +10,63 @@
   box-sizing: border-box;
 }
 
+<style>
+#voiceBtn {
+  position: fixed;
+  bottom: 25px;
+  right: 20px;
+  background: #6c3cff;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 22px;
+  font-size: 17px;
+  z-index: 9999;
+}
+</style>
+
+<button id="voiceBtn">🎤 बोलकर पूछें</button>
+
+<script>
+const btn = document.getElementById("voiceBtn");
+
+const SpeechRecognition =
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+  const recognition = new SpeechRecognition();
+
+  recognition.lang = "hi-IN";
+  recognition.interimResults = false;
+
+  btn.onclick = () => {
+    recognition.start();
+    btn.innerText = "🎤 सुन रहा हूँ...";
+  };
+
+  recognition.onresult = (event) => {
+    const question =
+      event.results[0][0].transcript;
+
+    btn.innerText = "🔊 " + question;
+
+    const answer = "आपने कहा " + question;
+
+    const speech = new SpeechSynthesisUtterance(answer);
+    speech.lang = "hi-IN";
+
+    speechSynthesis.speak(speech);
+  };
+
+  recognition.onend = () => {
+    btn.innerText = "🎤 बोलकर पूछें";
+  };
+} else {
+  btn.innerText = "Voice support नहीं है";
+}
+</script>
+  
 body {
   margin: 0;
   font-family: Arial, sans-serif;
