@@ -42,29 +42,7 @@ if (SpeechRecognition) {
 
   btn.onclick = () => {
     recognition.start();
-    btn.innerText = "🎤 सुन रहा हूँ...";
-  };
-
-  recognition.onresult = (event) => {
-    const question =
-      event.results[0][0].transcript;
-
-    btn.innerText = "🔊 " + question;
-
-    const answer = "आपने कहा " + question;
-
-    const speech = new SpeechSynthesisUtterance(answer);
-    speech.lang = "hi-IN";
-
-    speechSynthesis.speak(speech);
-  };
-
-  recognition.onend = () => {
-    btn.innerText = "🎤 बोलकर पूछें";
-  };
-} else {
-  btn.innerText = "Voice support नहीं है";
-}
+    
 </script>
 <section id="english-az" style="max-width: 900px; margin: 24px auto; font-family: system-ui, sans-serif; padding: 16px;">
   <h2 style="text-align: center; margin-bottom: 16px;">English A to Z</h2>
